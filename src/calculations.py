@@ -1,27 +1,44 @@
-# System Modules
 import math
-
-# Installed Modules
-# - None
-
-
-def area_of_circle(radius):
-    """Calculate the area of a circle given its radius."""
-    if radius < 0:
-        raise ValueError("Radius cannot be negative")
-    return math.pi * radius ** 2
+import pytest
+from calculations import area_of_circle, get_nth_fibonacci
 
 
-def get_nth_fibonacci(n):
-    """Calculate the nth Fibonacci number."""
-    if n < 0:
-        raise ValueError("n cannot be negative")
-    elif n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    else:
-        a, b = 0, 1
-        for _ in range(2, n + 1):
-            a, b = b, a + b
-        return b
+# ----- Tests for area_of_circle -----
+
+def test_area_of_circle_negative():
+    """Negative radius should raise ValueError."""
+    with pytest.raises(ValueError):
+        area_of_circle(-1)
+
+
+def test_area_of_circle_zero():
+    """Radius 0 should return 0."""
+    assert area_of_circle(0) == 0
+
+
+def test_area_of_circle_positive():
+    """Positive radius should return correct area."""
+    assert math.isclose(area_of_circle(2), math.pi * 4)
+
+
+# ----- Tests for get_nth_fibonacci -----
+
+def test_fibonacci_negative():
+    """Negative n should raise ValueError."""
+    with pytest.raises(ValueError):
+        get_nth_fibonacci(-1)
+
+
+def test_fibonacci_zero():
+    """n=0 should return 0."""
+    assert get_nth_fibonacci(0) == 0
+
+
+def test_fibonacci_one():
+    """n=1 should return 1."""
+    assert get_nth_fibonacci(1) == 1
+
+
+def test_fibonacci_large():
+    """A larger n should return the correct Fibonacci number."""
+    assert get_nth_fibonacci(10) == 55

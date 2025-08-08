@@ -37,3 +37,11 @@ def test_fibonacci_non_integer_input():
 def test_fibonacci_string_input():
     with pytest.raises(TypeError):
         get_nth_fibonacci("10")
+
+def test_area_of_circle_positive():
+    assert math.isclose(area_of_circle(1), math.pi)
+    assert math.isclose(area_of_circle(0), 0)
+
+def test_area_of_circle_negative():
+    with pytest.raises(ValueError):
+        area_of_circle(-1)

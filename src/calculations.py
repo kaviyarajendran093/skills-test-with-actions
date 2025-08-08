@@ -1,19 +1,14 @@
-# System Modules
 import math
-
-# Installed Modules
-# - None
-
+import pytest
 
 def area_of_circle(radius):
-    """Calculate the area of a circle given its radius."""
     if radius < 0:
         raise ValueError("Radius cannot be negative")
     return math.pi * radius ** 2
 
-
 def get_nth_fibonacci(n):
-    """Calculate the nth Fibonacci number."""
+    if not isinstance(n, int):
+        raise TypeError("n must be an integer")
     if n < 0:
         raise ValueError("n cannot be negative")
     elif n == 0:
@@ -25,3 +20,4 @@ def get_nth_fibonacci(n):
         for _ in range(2, n + 1):
             a, b = b, a + b
         return b
+
